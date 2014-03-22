@@ -22,15 +22,20 @@
  * @param hintText
  * @param answers
  * @param showMeanings
+ * @param backgroundimg
  */
 {template .questWindow}
-  <div style="">
-    <img src="{$character}" style="">
-    <div style="">{$title}</div>
-    <div style="">{if $showMeanings}{$hintText.english}{else}{$hintText.japanese}{/if}</div>
+  <div style="padding:20px;text-align:center;background-image:url({$backgroundimg});background-size:cover;height:90%">
+    <div style="font-size:40px;background-color:#F5C9DB;border:1px solid #F5629F;display:inline-block;padding:5px;">
+      {$title}
+    </div>
+    <img src="{$character}" style="width:256px;display:block;margin:auto;">
+    <div style="font-weight:bold;font-size:40px;background-color:#F5C9DB;border:1px solid #F5629F;display:inline-block;padding:5px;">
+      {if $showMeanings}{$hintText.english}{else}{$hintText.japanese}{/if}</div>
     <div style="">
       {foreach $ans in $answers}
-        <div id="{$ans.id}" style="float:left;">
+        <div id="{$ans.id}"
+            style="font-size:30px;padding:10px;border:1px solid blue;background-color:#94AFFF;margin:10px;display:inline-block;">
           {if $showMeanings}
             {$ans.english}
           {else}
@@ -45,12 +50,26 @@
 
 /**
  * @param character
+ * @param backgroundimg
+ * @param success
  */
 {template .questSuccess}
-  <div style="text-align:center;">
+  <div style="text-align:center;background-image:url({$backgroundimg});background-size:cover;height:90%">
     <div style="margin:auto">
       <img src={$character} style="display:inline-block;padding:15px;width:400px">
-      <div style="font-weight:bold;font-size:80px;color:green;display:inline-block;padding:15px;">やった！</div>
+      <div style="font-weight:bold;font-size:80px;display:inline-block;padding:15px;
+            {if $success}
+              color:green;background-color:#f5C9DB;border:1px solid #f5629F;
+            {else}
+              color:red;background-color:#FCA577;border:1px solid #FA732A;
+            {/if}
+            ">
+        {if $success}
+          やった!
+        {else}
+          へたこいた!
+        {/if}
+      </div>
     </div>
   </div>
 {/template}

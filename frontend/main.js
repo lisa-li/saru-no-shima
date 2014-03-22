@@ -1,4 +1,4 @@
-var quests = [
+quests = [
 {
   id: '1',
   name: 'hello',
@@ -40,11 +40,11 @@ for (var i = 0; i < quests.length; ++i) {
   questIndex[quests[i].id] = i;
 }
 
-var background = {
-  "Garden": "http://1.bp.blogspot.com/_Ol0ZREa9Igw/S_Y7xQybURI/AAAAAAAABXE/9qDZeaOJFF0/s1600/Japanese+Garden_900.jpg"
+backgrounds = {
+  "garden": "http://1.bp.blogspot.com/_Ol0ZREa9Igw/S_Y7xQybURI/AAAAAAAABXE/9qDZeaOJFF0/s1600/Japanese+Garden_900.jpg"
 };
 
-var characters = {
+characters = {
   "Alex": {
     neutral: "http://mascot.crystalxp.net/png/autigone-kirby-gc-22880.png",
     happy: "http://img1.wikia.nocookie.net/__cb20120627075127/kirby/en/images/thumb/0/01/KDCol_Kirby_K64.png/551px-KDCol_Kirby_K64.png",
@@ -152,7 +152,7 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 
-function renderQuestWin(character, title, question, showMeanings) {
+function renderQuestWin(character, title, question, backgroundUrl, showMeanings) {
   var questWin = document.getElementById('quest');
 
   // shuffle the answers.
@@ -164,6 +164,7 @@ function renderQuestWin(character, title, question, showMeanings) {
     title: title,
     hintText: question.question,
     answers: answers,
+    backgroundimg: backgroundUrl,
     showMeanings: !!showMeanings
   });
 
@@ -181,17 +182,26 @@ function advanceQuest() {
   } else {
     // quest has more questions.
     var question = quest.questions[current_quest.question];
-    renderQuestWin(characters[quest.character].neutral, quest.name, question, false /* showMeanings */)
+    renderQuestWin(characters[quest.character].neutral,
+                   quest.name,
+                   question,
+                   backgrounds[quest.background],
+                   false /* showMeanings */)
   }
 }
 
 function renderQuestEnding(status) {
   var questWin = document.getElementById('quest');
   var quest = quests[questIndex[current_quest.id]];
-  switch (status){
-    case 'happy':
-    soy.renderElement(questWin, templates.questSuccess, {character: characters[quest.character].happy})
-  }   
+  soy.renderElement(questWin,
+                    templates.questSuccess,
+                    {
+                      character: status == 'happy' ?
+                          characters[quest.character].happy :
+                          characters[quest.character].angry,
+                      backgroundimg: backgrounds[quest.background],
+                      success: status == 'happy'
+                    });
 }
 
 function questWindowClick(e) {
@@ -201,14 +211,45 @@ function questWindowClick(e) {
   var answerid = e.target.id;
   if (goog.array.find(question.correct,
                       function(question) { return question.id == answerid; })) {
-    console.log('clicked on right answer');
-    renderQuestWin(characters[quest.character].neutral, quest.name, question, true /* showMeanings */);
-    window.setTimeout(advanceQuest, 1000);
-  } //else if (goog.array.find(question.neutral
+    renderQuestWin(characters[quest.character].happy,
+                   quest.name,
+                   question,
+                   backgrounds[quest.background],
+                   true /* showMeanings */);
+    window.setTimeout(advanceQuest, 2000);
+  } else if (goog.array.find(question.neutral,
+                             function(question) { return question.id == answerid; })) {
+    renderQuestWin(characters[quest.character].confused,
+                   quest.name,
+                   question,
+                   backgrounds[quest.background],
+                   true /* showMeanings */);
+    window.setTimeout(function() {
+      renderQuestWin(characters[quest.character].confused,
+                     quest.name,
+                     question,
+                     backgrounds[quest.background],
+                     false /* showMeanings */);
+    }, 3000);
+  } else if (goog.array.find(question.wrong,
+                             function(question) { return question.id == answerid; })) {
+    renderQuestWin(characters[quest.character].angry,
+                   quest.name,
+                   question,
+                   backgrounds[quest.background],
+                   true /* showMeanings */);
+    window.setTimeout(function() {
+      renderQuestEnding('angry');
+    }, 4000);
+  }
 }
 
 function infoWindowClick() {
-  renderQuestWin(characters[this.data.character].neutral, this.data.name, this.data.questions[0]);
+  renderQuestWin(characters[this.data.character].neutral,
+                 this.data.name,
+                 this.data.questions[0],
+                 backgrounds[this.data.background],
+                 false /* showMeanings */);
 
   // set game state.
   current_quest = {
