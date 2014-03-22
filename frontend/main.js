@@ -5,7 +5,7 @@ var quests = [
   description: 'Greeting a friend.',
   character: 'Alex',
   location: [ -33.846235, 151.231714 ],
-  background: 'Garden'
+  background: 'garden',
   questions: [
     {
       question: {english: "Hello", japanese: 'こんにちは'},
@@ -39,9 +39,10 @@ questIndex = {};
 for (var i = 0; i < quests.length; ++i) {
   questIndex[quests[i].id] = i;
 }
-var bacground = {
+
+var background = {
   "Garden": "http://1.bp.blogspot.com/_Ol0ZREa9Igw/S_Y7xQybURI/AAAAAAAABXE/9qDZeaOJFF0/s1600/Japanese+Garden_900.jpg"
-}
+};
 
 var characters = {
   "Alex": {
@@ -50,7 +51,12 @@ var characters = {
     angry: "http://img2.wikia.nocookie.net/__cb20140110163651/ssbb/es/images/a/a5/Kirby_en_Kirby_Triple_Deluxe.png",
     confused: "http://img4.wikia.nocookie.net/__cb20131020025854/mugen/images/2/21/K3DS_Kirby.png"
   },
-  "Sam": "https://cdn2.iconfinder.com/data/icons/free-large-boss-icon-set/128/Uncle_Sam.png"
+  "Sam": {
+    neutral: "https://cdn2.iconfinder.com/data/icons/free-large-boss-icon-set/128/Uncle_Sam.png",
+    happy: "",
+    angry: "",
+    confused: ""
+  }
 };
 
 function initialize() {

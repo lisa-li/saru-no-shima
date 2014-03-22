@@ -20,3 +20,8 @@ templates.questWindow = function(opt_data, opt_ignored) {
   output += '</div></div>';
   return output;
 };
+
+
+templates.questSuccess = function(opt_data, opt_ignored) {
+  return '<div style="text-align:center;"><div style="margin:auto"><img src=' + soy.$$escapeHtml(opt_data.character) + ' style="display:inline-block;padding:15px;width:400px"><div style="font-weight:bold;font-size:80px;color:green;display:inline-block;padding:15px;">やった！</div></div></div>';
+};
