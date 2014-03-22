@@ -170,9 +170,6 @@ function renderQuestWin(character, title, question, backgroundUrl, showMeanings)
 
   // show the window
   questWin.style.display = 'block';
-
-  var closeButton = document.getElementById('closeButton');
-  closeButton.addEventListener('click',hideQuestWindow);
 }
 
 function advanceQuest() {
@@ -244,6 +241,8 @@ function questWindowClick(e) {
     window.setTimeout(function() {
       renderQuestEnding('angry');
     }, 4000);
+  } else if (answerid == 'closeButton') {
+    hideQuestWindow();
   }
 }
 
