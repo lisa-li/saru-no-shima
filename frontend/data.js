@@ -70,4 +70,12 @@ var quests = [
     }
   ]
 },
+{
+  id: '4',
+  name: 'eating',
+  description: 'Going out for dinner',
+  character: 'Sam',
+  location: [  35.790667, 140.354028 ],
+  questions: []
+}
 ];

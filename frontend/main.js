@@ -1,40 +1,3 @@
-quests1 = [
-{
-  id: '1',
-  name: 'hello',
-  description: 'Greeting a friend.',
-  character: 'Alex',
-  location: [ -33.846235, 151.231714 ],
-  background: 'garden',
-  questions: [
-    {
-      question: {english: "Hello", japanese: 'こんにちは'},
-      correct: [{id: 1, english: 'Hello', japanese: 'こんにちは'}],
-      neutral: [
-        {id: 2, english: 'Um', japanese: 'ええと'},
-        {id: 3, english: 'Er', japanese: 'あのう'}
-      ],
-      wrong: [{id: 4, english: 'Go away', japanese: 'かってにしろ'}]
-    }
-  ]
-},
-{
-  id: '2',
-  name: 'train ticket',
-  description: 'Buying a train ticket',
-  character: 'Sam',
-  location: [ -33.858667, 151.214028 ],
-  questions: [
-    {
-      question: "How may I help you?",
-      correct: ["I'd like to buy a train ticket"],
-      neutral: ["Train ticket?", "Buy ticket?"],
-      wrong: ["I want to buy a fish"]
-    }
-  ]
-},
-];
-
 questIndex = {};
 for (var i = 0; i < quests.length; ++i) {
   questIndex[quests[i].id] = i;
@@ -52,7 +15,7 @@ characters = {
     confused: "http://img4.wikia.nocookie.net/__cb20131020025854/mugen/images/2/21/K3DS_Kirby.png"
   },
   "Sam": {
-    neutral: "http://img3.wikia.nocookie.net/__cb20081130194119/kirby/en/images/7/72/WaddledeeK64.jpg",
+    neutral: "http://fc06.deviantart.net/fs36/f/2008/268/d/3/WADDLE_DEE__by_sonictheunknown.png",
     happy: "",
     angry: "",
     confused: ""
@@ -218,7 +181,7 @@ function questWindowClick(e) {
                    question,
                    backgrounds[quest.background],
                    true /* showMeanings */);
-    window.setTimeout(advanceQuest, 2000);
+    window.setTimeout(advanceQuest, 5000);
   } else if (goog.array.find(question.neutral,
                              function(question) { return question.id == answerid; })) {
     renderQuestWin(characters[quest.character].confused,
@@ -232,7 +195,7 @@ function questWindowClick(e) {
                      question,
                      backgrounds[quest.background],
                      false /* showMeanings */);
-    }, 3000);
+    }, 5000);
   } else if (goog.array.find(question.wrong,
                              function(question) { return question.id == answerid; })) {
     renderQuestWin(characters[quest.character].angry,
@@ -242,7 +205,7 @@ function questWindowClick(e) {
                    true /* showMeanings */);
     window.setTimeout(function() {
       renderQuestEnding('angry');
-    }, 4000);
+    }, 5000);
   }
 }
 

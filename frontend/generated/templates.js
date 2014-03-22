@@ -15,7 +15,7 @@ templates.questWindow = function(opt_data, opt_ignored) {
   var ansListLen24 = ansList24.length;
   for (var ansIndex24 = 0; ansIndex24 < ansListLen24; ansIndex24++) {
     var ansData24 = ansList24[ansIndex24];
-    output += '<div id="' + soy.$$escapeHtml(ansData24.id) + '" style="font-size:30px;padding:10px;border:1px solid blue;background-color:#94AFFF;margin:10px;display:inline-block;">' + ((opt_data.showMeanings) ? soy.$$escapeHtml(ansData24.english) : soy.$$escapeHtml(ansData24.japanese)) + '</div>';
+    output += '<div id="' + soy.$$escapeHtml(ansData24.id) + '" style="font-size:30px;padding:10px;border:1px solid blue;background-color:#94AFFF;margin:10px;display:inline-block;cursor:pointer">' + ((opt_data.showMeanings) ? soy.$$escapeHtml(ansData24.english) : soy.$$escapeHtml(ansData24.japanese)) + '</div>';
   }
   output += '</div></div>';
   return output;
