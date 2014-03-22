@@ -40,7 +40,12 @@ for (var i = 0; i < quests.length; ++i) {
 }
 
 var characters = {
-  "Alex": "http://mascot.crystalxp.net/png/autigone-kirby-gc-22880.png",
+  "Alex": {
+    neutral: "http://mascot.crystalxp.net/png/autigone-kirby-gc-22880.png",
+    happy: "",
+    angry: "",
+    confused: ""
+  },
   "Sam": "https://cdn1.iconfinder.com/data/icons/free-large-boss-icon-set/128/Uncle_Sam.png"
 };
 
@@ -159,18 +164,30 @@ function renderQuestWin(character, title, question, showMeanings) {
   questWin.style.display = 'block';
 }
 
-function questWindowClick() {
-  quest = quests[questIndex[current_quest.id]];
-  question = quest.questions[current_quest.question];
+function advanceQuest() {
+  var quest = quests[questIndex[current_quest.id]];
 
-  var answerid = this.id;
-  console.log(answerid);
-  console.log(target);
+  current_quest.question = current_quest.question + 1;
+  if (current_quest.question >= quest.questions.length) {
+    // Quest success.
+    renderQuestEnding('happy');
+  } else {
+    // quest has more questions.
+    var question = quest.questions[current_quest.question];
+    renderQuestWin(characters[quest.character], quest.name, question, false /* showMeanings */)
+  }
+}
+
+function questWindowClick(e) {
+  var quest = quests[questIndex[current_quest.id]];
+  var question = quest.questions[current_quest.question];
+
+  var answerid = e.target.id;
   if (goog.array.find(question.correct,
                       function(question) { return question.id == answerid; })) {
     console.log('clicked on right answer');
-    renderQuestWin(characters[quest.character], quest.name, question, true);
-    //window.setTimeout(advanceQuest, 1000);
+    renderQuestWin(characters[quest.character], quest.name, question, true /* showMeanings */);
+    window.setTimeout(advanceQuest, 1000);
   } //else if (goog.array.find(question.neutral
 }
 
