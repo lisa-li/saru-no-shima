@@ -15,17 +15,7 @@ var quests = [
         {id: 3, english: 'Great, I am well.', japanese: 'そごい、でんき　です。'}
       ],
       wrong: [{id: 4, english: 'Kiss me right now!', japanese: 'いっま、キス　して。'}]
-    }
-  ]
-},
-{
-  id: '2',
-  name: 'Making conversation.',
-  description: 'What are your hobbies?',
-  character: 'Alex',
-  location: [ 35.773111, 140.392639 ],
-  background: 'garden',
-  questions: [
+    },
     {
       question: {english: "Do you like gardening?", japanese: 'にわしごと　が　すき　です　か。'},
       correct: [{id: 1, english: 'I really like flower arranging.', japanese: 'いけばな　お　だい　すき　です。'}],
@@ -34,17 +24,7 @@ var quests = [
         {id: 3, english: 'I like photography.', japanese: 'しゃしn　お　すき　です。'}
       ],
       wrong: [{id: 4, english: 'We are having a party.', japanese: 'パアチ　お　します。'}]
-    }
-  ]
-},
-{
-  id: '3',
-  name: 'Making conversation.',
-  description: 'Ending a conversation.',
-  character: 'Alex',
-  location: [ 35.773111, 140.392639 ],
-  background: 'garden',
-  questions: [
+    },
     {
       question: {english: "Your Japanese is so good. Keep in touch.", japanese: 'にほんご　が　お　じょず　です　ね。'},
       correct: [{id: 1, english: 'Here is my telephone number.', japanese: 'これ　が　わたし　の　でんわばんご　です。'}],
@@ -55,5 +35,5 @@ var quests = [
       wrong: [{id: 4, english: 'Merry Christmas!', japanese: 'メリ　クリスマス。'}]
     }
   ]
-},
+}
 ];

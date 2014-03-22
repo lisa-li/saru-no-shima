@@ -1,4 +1,4 @@
-quests = [
+quests1 = [
 {
   id: '1',
   name: 'hello',
@@ -98,7 +98,7 @@ function initialize() {
 
 
   var mapOptions = {
-    center: new google.maps.LatLng(-33.846235, 151.231714),
+    center: new google.maps.LatLng(35.773111, 140.392639),
     zoom: 14,
     //disableDefaultUI: true
   };
