@@ -2,20 +2,25 @@ var quests = [
 {
   id: '1',
   name: 'hello',
+  description: 'Greeting a friend.',
   character: 'Alex',
   location: [ -33.846235, 151.231714 ],
   questions: [
     {
-      question: "Hello",
-      correct: ['Hello'],
-      neutral: ['Um', 'Er'],
-      wrong: ['Go away']
+      question: {english: "Hello", japanese: 'こんにちは'},
+      correct: [{english: 'Hello', japanese: 'こんにちは'}],
+      neutral: [
+        {english: 'Um', japanese: 'ええと'},
+        {english: 'Er', japanese: 'あのう'}
+      ],
+      wrong: [{english: 'Go away', japanese: 'かってにしろ'}]
     }
   ]
 },
 {
   id: '2',
   name: 'train ticket',
+  description: 'Buying a train ticket',
   character: 'Sam',
   location: [ -33.858667, 151.214028 ],
   questions: [
@@ -29,14 +34,15 @@ var quests = [
 },
 ];
 
+questIndex = {};
+for (var i = 0; i < quests.length; ++i) {
+  questIndex[quests[i].id] = i;
+}
+
 var characters = {
   "Alex": "http://img1.appstatic.opera.com/prodimgres/mo_icon_big_thumb_269332.png",
   "Sam": "https://cdn1.iconfinder.com/data/icons/free-large-boss-icon-set/128/Uncle_Sam.png"
 };
-
-var infowindow = new google.maps.InfoWindow({
-  content: "hello world - replace this with the questions HTML"
-});
 
 function initialize() {
   // Sets up the map
@@ -84,6 +90,20 @@ function initialize() {
   var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
   map.setOptions({styles: styles});
 
+  // game state
+  var current_quest = {
+    id: -1,
+    question: 0
+  };
+
+  // listen for answer clicks
+  document.getElementById('quest').onclick = questWindowClick;
+
+  // Set up popup window that shows above each quest marker.
+  var infowindow = new google.maps.InfoWindow({
+    content: "hello world - replace this with the questions HTML"
+  });
+
   // Add markers for the quests.
   for (var i = 0; i < quests.length; ++i) {
     var q = quests[i];
@@ -95,9 +115,66 @@ function initialize() {
     });
     marker.data = q;
     google.maps.event.addListener(marker, "click", function() {
-      infowindow.setContent(this.data.questions[0].question);
+      // remove previous listener on infowindow
+      infowindow.getContent().onclick = null;
+      infowindow.setContent(soy.renderAsElement(templates.infoWindowContents, {
+        title: this.data.name,
+        description: this.data.description,
+        character: characters[this.data.character]
+      }));
+      infowindow.getContent().onclick = infoWindowClick;
+      infowindow.getContent().data=this.data;
       infowindow.open(map, this);
+
     });
   }
 }
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+function renderQuestWin(character, title, question, showMeanings) {
+  var questWin = document.getElementById('quest');
+
+  console.log(title);
+  console.log(question);
+
+  // shuffle the answers.
+  var answers = goog.array.concat(question.correct, question.neutral, question.wrong);
+  goog.array.shuffle(answers);
+
+  questWin.innerHTML = templates.questWindow({
+    character: character,
+    title: title,
+    hintText: question.question,
+    answers: answers,
+    showMeanings: !!showMeanings
+  });
+
+  // show the window
+  questWin.style.display = 'block';
+}
+
+function questWindowClick() {
+  console.log('questWindowClick');
+
+  quest = quests[questIndex[current_quest.id]];
+  question = quest[current_quest.question];
+
+  var answerid = this.id;
+  if (goog.array.find(question.correct,
+                      function(question) { return question.id == answerId; })) {
+    renderQuestWin(characters[quest.character], 
+    window.setTimeout(advanceQuest, 1000);
+  } else if (goog.array.find(question.neutral
+}
+
+function infoWindowClick() {
+  renderQuestWin(characters[this.data.character], this.data.name, this.data.questions[0]);
+
+  // set game state.
+  current_quest = {
+    id: this.data.id,
+    question: 0
+  };
+
+};

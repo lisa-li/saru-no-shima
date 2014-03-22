@@ -1,0 +1,43 @@
+{namespace templates}
+
+/**
+ * @param character
+ * @param title
+ * @param description
+ */
+{template .infoWindowContents}
+  <div style="">
+    <img src="{$character}" style="display:inline-block;width:50px;padding:10px;">
+    <div style="display:inline-block;vertical-align:top;padding:12px 10px 10px;">
+      <div style="font-weight:bold;font-size:14px">{$title}</div>
+      <div style="">{$description}</div>
+    </div>
+  </div>
+{/template}
+
+
+/**
+ * @param character
+ * @param title
+ * @param hintText
+ * @param answers
+ * @param showMeanings
+ */
+{template .questWindow}
+  <div style="">
+    <img src="{$character}" style="">
+    <div style="">{$title}</div>
+    <div style="">{if $showMeanings}{$hintText.english}{else}{$hintText.japanese}{/if}</div>
+    <div style="">
+      {foreach $ans in $answers}
+        <div id="{$ans.id}" style="float:left;">
+          {if $showMeanings}
+            {$ans.english}
+          {else}
+            {$ans.japanese}
+          {/if}
+        </div>
+      {/foreach}
+    </div>
+  </div>
+{/template}
