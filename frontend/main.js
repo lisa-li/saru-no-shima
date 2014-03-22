@@ -166,6 +166,9 @@ function renderQuestWin(character, title, question, showMeanings) {
 
   // show the window
   questWin.style.display = 'block';
+
+  var closeButton = document.getElementById('closeButton');
+  closeButton.addEventListener('click',hideQuestWindow);
 }
 
 function advanceQuest() {
@@ -204,3 +207,8 @@ function infoWindowClick() {
     question: 0
   };
 };
+
+function hideQuestWindow() {
+  var questWin = document.getElementById('quest');
+  questWin.style.display = 'none';
+}

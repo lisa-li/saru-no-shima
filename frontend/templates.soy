@@ -25,6 +25,7 @@
  */
 {template .questWindow}
   <div style="">
+    <img id="closeButton" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-24.png" style="position: absolute; top: 0px;right: 0px;">
     <img src="{$character}" style="">
     <div style="">{$title}</div>
     <div style="">{if $showMeanings}{$hintText.english}{else}{$hintText.japanese}{/if}</div>
