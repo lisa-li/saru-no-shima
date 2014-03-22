@@ -52,7 +52,7 @@ characters = {
     confused: "http://img4.wikia.nocookie.net/__cb20131020025854/mugen/images/2/21/K3DS_Kirby.png"
   },
   "Sam": {
-    neutral: "https://cdn2.iconfinder.com/data/icons/free-large-boss-icon-set/128/Uncle_Sam.png",
+    neutral: "http://img3.wikia.nocookie.net/__cb20081130194119/kirby/en/images/7/72/WaddledeeK64.jpg",
     happy: "",
     angry: "",
     confused: ""
