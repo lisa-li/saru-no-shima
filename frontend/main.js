@@ -209,7 +209,9 @@ function questWindowClick(e) {
   var question = quest.questions[current_quest.question];
 
   var answerid = e.target.id;
-  if (goog.array.find(question.correct,
+  if (answerid == 'closeButton') {
+    hideQuestWindow();
+  } else if (goog.array.find(question.correct,
                       function(question) { return question.id == answerid; })) {
     renderQuestWin(characters[quest.character].happy,
                    quest.name,
@@ -241,8 +243,6 @@ function questWindowClick(e) {
     window.setTimeout(function() {
       renderQuestEnding('angry');
     }, 4000);
-  } else if (answerid == 'closeButton') {
-    hideQuestWindow();
   }
 }
 
