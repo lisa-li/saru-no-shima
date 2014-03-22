@@ -8,12 +8,12 @@ var quests = [
   questions: [
     {
       question: {english: "Hello", japanese: 'こんにちは'},
-      correct: [{english: 'Hello', japanese: 'こんにちは'}],
+      correct: [{id: 1, english: 'Hello', japanese: 'こんにちは'}],
       neutral: [
-        {english: 'Um', japanese: 'ええと'},
-        {english: 'Er', japanese: 'あのう'}
+        {id: 2, english: 'Um', japanese: 'ええと'},
+        {id: 3, english: 'Er', japanese: 'あのう'}
       ],
-      wrong: [{english: 'Go away', japanese: 'かってにしろ'}]
+      wrong: [{id: 4, english: 'Go away', japanese: 'かってにしろ'}]
     }
   ]
 },
@@ -40,7 +40,7 @@ for (var i = 0; i < quests.length; ++i) {
 }
 
 var characters = {
-  "Alex": "http://86bb71d19d3bcb79effc-d9e6924a0395cb1b5b9f03b7640d26eb.r91.cf1.rackcdn.com/wp-content/uploads/2013/07/super-smash-bros-wii-u-and-3ds-kirby-artwork.jpg",
+  "Alex": "http://mascot.crystalxp.net/png/autigone-kirby-gc-22880.png",
   "Sam": "https://cdn1.iconfinder.com/data/icons/free-large-boss-icon-set/128/Uncle_Sam.png"
 };
 
@@ -109,7 +109,8 @@ function initialize() {
     var q = quests[i];
     var img = {
       url: characters[q.character],
-      size: new google.maps.Size(128, 128)
+      size: new google.maps.Size(128, 128),
+      scaledSize: new google.maps.Size(128, 128)
     }
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(q.location[0], q.location[1]),
@@ -159,14 +160,15 @@ function renderQuestWin(character, title, question, showMeanings) {
 }
 
 function questWindowClick() {
-  console.log('questWindowClick');
-
   quest = quests[questIndex[current_quest.id]];
-  question = quest[current_quest.question];
+  question = quest.questions[current_quest.question];
 
   var answerid = this.id;
+  console.log(answerid);
+  console.log(target);
   if (goog.array.find(question.correct,
-                      function(question) { return question.id == answerId; })) {
+                      function(question) { return question.id == answerid; })) {
+    console.log('clicked on right answer');
     renderQuestWin(characters[quest.character], quest.name, question, true);
     //window.setTimeout(advanceQuest, 1000);
   } //else if (goog.array.find(question.neutral
@@ -180,5 +182,4 @@ function infoWindowClick() {
     id: this.data.id,
     question: 0
   };
-
 };
