@@ -8,10 +8,10 @@ var quests = [
   background: 'garden',
   questions: [
     {
-      question: {english: "Hello. How are you?", japanese: 'こにちは。おげんき　ですか。'},
+      question: {english: "Hello. How are you?", japanese: 'こんにちは。おげんき　ですか。'},
       correct: [{id: 1, english: 'Yes, I am well. How are you?', japanese: 'はい、げんき　です。あなたは?'}],
       neutral: [
-        {id: 2, english: 'Hi, who are you?', japanese: 'こにちは。あなたは。'},
+        {id: 2, english: 'Hi, who are you?', japanese: 'こんにちは。あなたは。'},
         {id: 3, english: 'I"m really well!', japanese: 'そごい、げんき　です。'}
       ],
       wrong: [{id: 4, english: 'Kiss me right now!', japanese: 'いっま、キス　して。'}]
