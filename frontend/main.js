@@ -46,7 +46,7 @@ var characters = {
     angry: "",
     confused: ""
   },
-  "Sam": "https://cdn1.iconfinder.com/data/icons/free-large-boss-icon-set/128/Uncle_Sam.png"
+  "Sam": "https://cdn2.iconfinder.com/data/icons/free-large-boss-icon-set/128/Uncle_Sam.png"
 };
 
 function initialize() {
@@ -113,7 +113,7 @@ function initialize() {
   for (var i = 0; i < quests.length; ++i) {
     var q = quests[i];
     var img = {
-      url: characters[q.character],
+      url: characters[q.character].neutral,
       size: new google.maps.Size(128, 128),
       scaledSize: new google.maps.Size(128, 128)
     }
@@ -130,7 +130,7 @@ function initialize() {
       infowindow.setContent(soy.renderAsElement(templates.infoWindowContents, {
         title: this.data.name,
         description: this.data.description,
-        character: characters[this.data.character]
+        character: characters[this.data.character].neutral
       }));
       infowindow.getContent().onclick = infoWindowClick;
       infowindow.getContent().data=this.data;
@@ -144,9 +144,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 function renderQuestWin(character, title, question, showMeanings) {
   var questWin = document.getElementById('quest');
-
-  console.log(title);
-  console.log(question);
 
   // shuffle the answers.
   var answers = goog.array.concat(question.correct, question.neutral, question.wrong);
@@ -174,8 +171,17 @@ function advanceQuest() {
   } else {
     // quest has more questions.
     var question = quest.questions[current_quest.question];
-    renderQuestWin(characters[quest.character], quest.name, question, false /* showMeanings */)
+    renderQuestWin(characters[quest.character].neutral, quest.name, question, false /* showMeanings */)
   }
+}
+
+function renderQuestEnding(status) {
+  var questWin = document.getElementById('quest');
+  var quest = quests[questIndex[current_quest.id]];
+  switch (status){
+    case 'happy':
+    soy.renderElement(questWin, templates.questSuccess, {character: characters[quest.character].happy})
+  }   
 }
 
 function questWindowClick(e) {
@@ -186,13 +192,13 @@ function questWindowClick(e) {
   if (goog.array.find(question.correct,
                       function(question) { return question.id == answerid; })) {
     console.log('clicked on right answer');
-    renderQuestWin(characters[quest.character], quest.name, question, true /* showMeanings */);
+    renderQuestWin(characters[quest.character].neutral, quest.name, question, true /* showMeanings */);
     window.setTimeout(advanceQuest, 1000);
   } //else if (goog.array.find(question.neutral
 }
 
 function infoWindowClick() {
-  renderQuestWin(characters[this.data.character], this.data.name, this.data.questions[0]);
+  renderQuestWin(characters[this.data.character].neutral, this.data.name, this.data.questions[0]);
 
   // set game state.
   current_quest = {
