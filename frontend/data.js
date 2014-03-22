@@ -8,31 +8,31 @@ var quests = [
   background: 'garden',
   questions: [
     {
-      question: {english: "Hello. How are you?", japanese: 'こにちわ。お　げんき　ですか。'},
-      correct: [{id: 1, english: 'Yes, I am well. How are you?', japanese: 'はい、げんき　です　か。'}],
+      question: {english: "Hello. How are you?", japanese: 'こにちは。おげんき　ですか。'},
+      correct: [{id: 1, english: 'Yes, I am well. How are you?', japanese: 'はい、げんき　です。あなたは?'}],
       neutral: [
-        {id: 2, english: 'Hi, and you?', japanese: 'こにちわ。あなた　わ。'},
-        {id: 3, english: 'Great, I am well.', japanese: 'そごい、でんき　です。'}
+        {id: 2, english: 'Hi, who are you?', japanese: 'こにちは。あなたは。'},
+        {id: 3, english: 'I"m really well!', japanese: 'そごい、げんき　です。'}
       ],
       wrong: [{id: 4, english: 'Kiss me right now!', japanese: 'いっま、キス　して。'}]
     },
     {
-      question: {english: "Do you like gardening?", japanese: 'にわしごと　が　すき　です　か。'},
-      correct: [{id: 1, english: 'I really like flower arranging.', japanese: 'いけばな　お　だい　すき　です。'}],
+      question: {english: "Do you like gardening?", japanese: 'にわしごと　が　すき　です　か?'},
+      correct: [{id: 1, english: 'I really like flower arranging.', japanese: 'いけばな　おだいすき　です。'}],
       neutral: [
         {id: 2, english: 'Bonsais are great!', japanese: 'ぼんさい　が　そごい　です　ね。'},
-        {id: 3, english: 'I like photography.', japanese: 'しゃしn　お　すき　です。'}
+        {id: 3, english: 'I like photography.', japanese: 'しゃしん　おすき　です。'}
       ],
-      wrong: [{id: 4, english: 'We are having a party.', japanese: 'パアチ　お　します。'}]
+      wrong: [{id: 4, english: 'We are having a party.', japanese: 'パアテイー　おします。'}]
     },
     {
-      question: {english: "Your Japanese is so good. Keep in touch.", japanese: 'にほんご　が　お　じょず　です　ね。'},
-      correct: [{id: 1, english: 'Here is my telephone number.', japanese: 'これ　が　わたし　の　でんわばんご　です。'}],
+      question: {english: "Your Japanese is so good. Keep in touch.", japanese: 'にほんご　が　おじょず　です　ね。おたがいに　れんらく　を　とりあいましょう。'},
+      correct: [{id: 1, english: 'Yes! Here is my telephone number.', japanese: 'はい！　これ　が　わたし　の　でんわばんご　です。'}],
       neutral: [
-        {id: 2, english: 'Bon voyage.', japanese: 'よい　たび　お。'},
-        {id: 3, english: 'It is nothing really.', japanese: 'つ　ま　らない　もの　です　が。'}
+        {id: 2, english: 'Bon voyage.', japanese: 'よい　たび　を。'},
+        {id: 3, english: 'Bugger off!', japanese: 'かってにしろ'}
       ],
-      wrong: [{id: 4, english: 'Merry Christmas!', japanese: 'メリ　クリスマス。'}]
+      wrong: [{id: 4, english: 'Merry Christmas!', japanese: 'メリー　クリスマス。'}]
     }
   ]
 },
