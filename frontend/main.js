@@ -107,11 +107,15 @@ function initialize() {
   // Add markers for the quests.
   for (var i = 0; i < quests.length; ++i) {
     var q = quests[i];
+    var img = {
+      url: characters[q.character],
+      size: new google.maps.Size(128, 128)
+    }
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(q.location[0], q.location[1]),
       map: map,
       title: q.name,
-      icon: characters[q.character],
+      icon: img
     });
     marker.data = q;
     google.maps.event.addListener(marker, "click", function() {
@@ -163,9 +167,9 @@ function questWindowClick() {
   var answerid = this.id;
   if (goog.array.find(question.correct,
                       function(question) { return question.id == answerId; })) {
-    renderQuestWin(characters[quest.character], 
-    window.setTimeout(advanceQuest, 1000);
-  } else if (goog.array.find(question.neutral
+    renderQuestWin(characters[quest.character], quest.name, question, true);
+    //window.setTimeout(advanceQuest, 1000);
+  } //else if (goog.array.find(question.neutral
 }
 
 function infoWindowClick() {
