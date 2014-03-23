@@ -9,7 +9,7 @@ backgrounds = {
 
 characters = {
   "Alex": {
-    neutral: "http://mascot.crystalxp.net/png/autigone-kirby-gc-22880.png",
+    neutral: "http://static2.wikia.nocookie.net/__cb20131006150424/animaljam/images/5/5c/Kirby.png",
     happy: "http://img1.wikia.nocookie.net/__cb20120627075127/kirby/en/images/thumb/0/01/KDCol_Kirby_K64.png/551px-KDCol_Kirby_K64.png",
     angry: "http://img2.wikia.nocookie.net/__cb20140110163651/ssbb/es/images/a/a5/Kirby_en_Kirby_Triple_Deluxe.png",
     confused: "http://img4.wikia.nocookie.net/__cb20131020025854/mugen/images/2/21/K3DS_Kirby.png"
